@@ -11,6 +11,12 @@ import lombok.*;
 @NoArgsConstructor
 public class Food {
 
+    public Food(FoodRequest data) {
+        this.image = data.image();
+        this.title = data.title();
+        this.price = data.price();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

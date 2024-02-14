@@ -16,4 +16,8 @@ public class FoodService {
     public List<Food> findAll() {
         return repository.findAll();
     }
+
+    public void saveFood() {
+
+    }
 }
