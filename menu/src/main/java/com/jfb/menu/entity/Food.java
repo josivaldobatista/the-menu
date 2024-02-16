@@ -12,9 +12,9 @@ import lombok.*;
 public class Food {
 
     public Food(FoodRequest data) {
-        this.image = data.image();
-        this.title = data.title();
-        this.price = data.price();
+        this.image = data.getImage();
+        this.title = data.getTitle();
+        this.price = data.getPrice();
     }
 
     @Id

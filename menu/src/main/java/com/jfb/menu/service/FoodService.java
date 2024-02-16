@@ -1,6 +1,7 @@
 package com.jfb.menu.service;
 
 import com.jfb.menu.entity.Food;
+import com.jfb.menu.entity.FoodRequest;
 import com.jfb.menu.entity.FoodResponse;
 import com.jfb.menu.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class FoodService {
 
@@ -18,12 +17,21 @@ public class FoodService {
     private FoodRepository repository;
 
     @Transactional(readOnly = true)
-    public Page<FoodResponse> findAll(PageRequest pageRequest) {
+    public Page<FoodResponse> findAllPaged(PageRequest pageRequest) {
         Page<Food> page = repository.findAll(pageRequest);
-        return page.map(x -> new FoodResponse(x));
+        return page.map(FoodResponse::new);
     }
 
-    public void saveFood() {
+    public FoodRequest insert(FoodRequest request) {
+        Food entity = new Food();
+        copyDtoToEntity(request, entity);
+        entity = repository.save(entity);
+        return new FoodRequest(entity);
+    }
 
+    private void copyDtoToEntity(FoodRequest dto, Food entity) {
+        entity.setTitle(dto.getTitle());
+        entity.setImage(dto.getImage());
+        entity.setPrice(dto.getPrice());
     }
 }
