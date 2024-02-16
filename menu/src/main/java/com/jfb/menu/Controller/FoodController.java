@@ -6,6 +6,9 @@ import com.jfb.menu.entity.FoodResponse;
 import com.jfb.menu.repository.FoodRepository;
 import com.jfb.menu.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +34,15 @@ public class FoodController {
 
     @GetMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<List<FoodResponse>> getAll() {
+    public ResponseEntity<Page<FoodResponse>> findAll(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+            @RequestParam(value = "orderBy", defaultValue = "title") String orderBy) {
 
-        List<FoodResponse> foodList = service
-                .findAll()
-                .stream()
-                .map(FoodResponse::new)
-                .toList();
-        return ResponseEntity.ok().body(foodList);
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Page<FoodResponse> list = service.findAll(pageRequest);
+
+        return ResponseEntity.ok().body(list);
     }
 }
