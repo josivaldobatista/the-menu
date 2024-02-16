@@ -1,7 +1,7 @@
 package com.jfb.menu.Controller;
 
-import com.jfb.menu.entity.Food;
 import com.jfb.menu.entity.FoodRequest;
+import com.jfb.menu.entity.FoodRequestRecord;
 import com.jfb.menu.entity.FoodResponse;
 import com.jfb.menu.repository.FoodRepository;
 import com.jfb.menu.service.FoodService;
@@ -34,10 +34,10 @@ public class FoodController {
 //    }
 
     @PostMapping
-    public ResponseEntity<FoodRequest> insert(@RequestBody FoodRequest request) {
-        FoodRequest foodRequest = service.insert(request);
+    public ResponseEntity<FoodRequestRecord> insert(@RequestBody FoodRequest request) {
+        FoodRequestRecord foodRequest = service.insert(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(foodRequest.getId()).toUri();
+                .buildAndExpand(foodRequest.entity().getId()).toUri();
         return ResponseEntity.created(uri).body(foodRequest);
     }
 

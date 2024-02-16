@@ -1,7 +1,10 @@
 package com.jfb.menu.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "foods")
 @Entity(name = "foods")
@@ -10,12 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Food {
-
-    public Food(FoodRequest data) {
-        this.image = data.getImage();
-        this.title = data.getTitle();
-        this.price = data.getPrice();
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

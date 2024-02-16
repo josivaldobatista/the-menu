@@ -2,6 +2,7 @@ package com.jfb.menu.service;
 
 import com.jfb.menu.entity.Food;
 import com.jfb.menu.entity.FoodRequest;
+import com.jfb.menu.entity.FoodRequestRecord;
 import com.jfb.menu.entity.FoodResponse;
 import com.jfb.menu.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,16 @@ public class FoodService {
         return page.map(FoodResponse::new);
     }
 
-    public FoodRequest insert(FoodRequest request) {
+    public FoodRequestRecord insert(FoodRequest request) {
         Food entity = new Food();
         copyDtoToEntity(request, entity);
         entity = repository.save(entity);
-        return new FoodRequest(entity);
+        return new FoodRequestRecord(entity);
     }
 
     private void copyDtoToEntity(FoodRequest dto, Food entity) {
-        entity.setTitle(dto.getTitle());
-        entity.setImage(dto.getImage());
-        entity.setPrice(dto.getPrice());
+        entity.setTitle(dto.title());
+        entity.setImage(dto.image());
+        entity.setPrice(dto.price());
     }
 }
