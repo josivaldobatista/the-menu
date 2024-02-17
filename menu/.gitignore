@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Api ###
+db-data/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -15,7 +18,6 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
-.db-data/
 *.iws
 *.iml
 *.ipr

@@ -25,14 +25,6 @@ public class FoodController {
     @Autowired
     private FoodRepository repository;
 
-//    @PostMapping
-//    @CrossOrigin(origins = "*", allowedHeaders = "*")
-//    public void saveFood(@RequestBody FoodRequest data) {
-//        Food foodData = new Food(data);
-//        repository.save(foodData);
-//        return;
-//    }
-
     @PostMapping
     public ResponseEntity<FoodRequestRecord> insert(@RequestBody FoodRequest request) {
         FoodRequestRecord foodRequest = service.insert(request);
