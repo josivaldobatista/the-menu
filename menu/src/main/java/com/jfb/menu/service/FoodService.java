@@ -25,14 +25,14 @@ public class FoodService {
 
     public FoodRequestRecord insert(FoodRequest request) {
         Food entity = new Food();
-        copyDtoToEntity(request, entity);
+        copyRecordToEntity(request, entity);
         entity = repository.save(entity);
         return new FoodRequestRecord(entity);
     }
 
-    private void copyDtoToEntity(FoodRequest dto, Food entity) {
-        entity.setTitle(dto.title());
-        entity.setImage(dto.image());
-        entity.setPrice(dto.price());
+    private void copyRecordToEntity(FoodRequest record, Food entity) {
+        entity.setTitle(record.title());
+        entity.setImage(record.image());
+        entity.setPrice(record.price());
     }
 }
